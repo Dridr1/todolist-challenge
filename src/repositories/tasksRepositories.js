@@ -2,19 +2,27 @@ import db from "../db";
 
 export const addTaskRepository = async (data) => {
     try {
-        db.query("INSERT INTO tasks (task) VALUES ($1)", [data.task]);
+        db.query(`INSERT INTO tasks (task) VALUES ($1)`, [data.task]);
     } catch (error) {
         console.log(error);
     }
-}
+};
+
+export const getTaskById = async (id) => {
+    try {
+        db.query(`SELECT * FROM tasks WHERE id=$1`, [id]);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 export const getAllTasks = async () => {
     try {
-        console.log(`SELECT * FROM tasks`);
+        db.query(`SELECT * FROM tasks`);
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const alterTaskRepository = async (data) => {
     try {
@@ -22,7 +30,7 @@ export const alterTaskRepository = async (data) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const removeTastRepository = async (data) => {
     try {
@@ -30,4 +38,4 @@ export const removeTastRepository = async (data) => {
     } catch (error) {
         console.log(error);
     }
-}
+};

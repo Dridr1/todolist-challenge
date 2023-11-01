@@ -1,20 +1,18 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { json } from "express";
-import router from "./routes/router";
+import router from "./routes/router.js";
 
 dotenv.config();
 
-const app = express();
+const server = express();
 
-app.use(cors());
-app.use(json());
-app.use(router);
+server.use(cors());
+server.use(json());
+server.use(router);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+server.listen(PORT, ()=> {
     console.log(`Server up on PORT ${PORT}`);
 });
-
-export default app;
