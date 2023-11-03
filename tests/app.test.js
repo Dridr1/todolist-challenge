@@ -17,7 +17,7 @@ describe("todo list testes de integração", () => {
                 const res = await agent.post("/add-task").send(task);
                 expect(res.statusCode).toEqual(201);
             } catch (error) {
-                console.log(error);
+                throw new Error(error);
             }
         });
     });
