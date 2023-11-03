@@ -1,8 +1,8 @@
-import db from "../db";
+import db from "../db.js";
 
 export const addTaskRepository = async (data) => {
     try {
-        db.query(`INSERT INTO tasks (task) VALUES ($1)`, [data.task]);
+        await db.query(`INSERT INTO tasks (task) VALUES ($1)`, [data.task]);
     } catch (error) {
         console.log(error);
     }
@@ -10,7 +10,8 @@ export const addTaskRepository = async (data) => {
 
 export const getTaskById = async (id) => {
     try {
-        db.query(`SELECT * FROM tasks WHERE id=$1`, [id]);
+        const task = await db.query(`SELECT * FROM tasks WHERE id=$1`, [id]);
+        return task.rows;
     } catch (error) {
         console.log(error);
     }
@@ -18,15 +19,16 @@ export const getTaskById = async (id) => {
 
 export const getAllTasks = async () => {
     try {
-        db.query(`SELECT * FROM tasks`);
+        const tasks = await db.query(`SELECT * FROM tasks`);
+        return tasks.rows;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const alterTaskRepository = async (data) => {
+export const updateTaskRepository = async (data) => {
     try {
-        db.query(`UPDATE tasks SET task=$1 WHERE id=$2`, [data.task, data.id]);
+        await db.query(`UPDATE tasks SET task=$1 WHERE id=$2`, [data.task, data.id]);
     } catch (error) {
         console.log(error);
     }
@@ -34,7 +36,7 @@ export const alterTaskRepository = async (data) => {
 
 export const removeTastRepository = async (data) => {
     try {
-        db.query(`DELETE FROM tasks WHERE id=$1`, [data.id]);
+        await db.query(`DELETE FROM tasks WHERE id=$1`, [data.id]);
     } catch (error) {
         console.log(error);
     }
